@@ -51,9 +51,11 @@
 !
 !     Do the printing job.
 !
-      write(*,*)' Printing Matrix'
+	write(*,*)' Printing Matrix'
 !
-      ADD CODE HERE
+      do i=1,3
+	write(*,1000) matrix(i,1),matrix(i,2),matrix(i,3)
+      endDo
 !
 !
       return
