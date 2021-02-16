@@ -1,14 +1,15 @@
       Program prgm_01_03
 !
-!     This program reads TWO 3x3 matrices from user-provided input files. After the
-!     files are opened and read, they are closed and then printed. The product of the
-!     matrices is calculated, and this product is printed.
-!
+!     This program reads two 3x3 matrices from user-provided input files.
+!     After the files are opened and read, they are closed and the matrices
+!     printed. Finally, the matrix product of these two matrices is formed
+!     using the f90 intrinsic function MatMul. This final matrix is also
+!     printed.
 !
       implicit none
       integer,parameter::inFileUnitA=10,inFileUnitB=10
-      integer::errorFlag,i,j
-      real,dimension(3,3)::matrixInA, matrixInB, product
+      integer::errorFlag,i
+      real,dimension(3,3)::matrixInA, matrixInB, matrixProduct
       character(len=128)::fileNameA,fileNameB
 !
 !
@@ -45,21 +46,16 @@
       endDo
       close(inFileUnitB)
 !
-!     Call the subroutine PrintMatrix to print matrixInA.
+!     Call the subroutine PrintMatrix to print matrixInA and matrixInB.
 !
       call PrintMatrix3x3(matrixInA)
       call PrintMatrix3x3(matrixInB)
-
-
-!     *********  HERE I ADD MY PRODUCT SECTION  ************
-
-     do i=1,3
-	do j=1,3
-	  product(i,j)=matrixInA(i,1)*matrixInB(1,j)+matrixInA(i,2)*matrixInB(2,j)+matrixInA(i,3)*matrixInB(3,j)
-	endDo
-     endDo
-
-     call PrintMatrix3x3(product)
+!
+!     Form matrixProduct using the intrinsic function MatMul. Then, print the
+!     result.
+!
+      matrixProduct = MatMul(matrixInA,matrixInB)
+      call PrintMatrix3x3(matrixProduct)
 
   999 continue
       End Program prgm_01_03
